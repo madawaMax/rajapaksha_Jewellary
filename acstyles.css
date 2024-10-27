@@ -1,0 +1,44 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-control {
+    border-radius: 5px;
+    box-shadow: none;
+    border-color: #ced4da;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.img{
+
+    width: 100px;
+    height: 100px;
+    
+    
+    }
+    
+    .imgdiv{
+    
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+     
+    }

@@ -1,0 +1,16 @@
+
+.profilebody{
+    display: flex;
+    background-image: url(resource/profilebg.jpg);
+    background-size: cover;
+    background-repeat:no-repeat;
+    
+
+
+}
+
+.logo {
+    display: block;
+    margin: auto;
+    max-width: 150px;
+}
