@@ -5,6 +5,34 @@ session_start();
 
 if (isset($_SESSION["u"])) {
 
+    if (isset($_GET['id'])) {
+
+
+        $product_id = intval($_GET['id']);
+        $query = "SELECT * FROM product
+        INNER JOIN stock ON  stock.product_id = product.p_id
+        INNER JOIN product_image ON product.p_id = product_image.product_p_id 
+        INNER JOIN category ON category.c_id = product.category_id 
+        INNER JOIN brand ON brand.b_id = product.brand_id
+        INNER JOIN model ON model.m_id = product.model_id
+        INNER JOIN size ON size.s_id = product.size_id
+        WHERE p_id =  $product_id";
+        $rs = Database::search($query);
+        $n = $rs->num_rows;
+
+        // Check if the product was found
+        if ($n > 0) {
+            // Fetch product data
+            $product = $rs->fetch_assoc();
+        } else {
+            echo "Product not found.";
+            exit;
+        }
+    } else {
+        echo "No product ID specified.";
+        exit;
+    }
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -82,24 +110,23 @@ if (isset($_SESSION["u"])) {
                 <div class="row">
                     <!-- Product Image -->
                     <div class="col-lg-6 col-md-6">
-                        <img src="https://via.placeholder.com/500" class="product-image" alt="Product Image">
+                        <img src="<?php echo htmlspecialchars($product['code']); ?>" class="product-image" alt="Product Image">
                     </div>
 
                     <!-- Product Details -->
                     <div class="col-lg-6 col-md-6">
-                        <h1 class="product-title">Product Name</h1>
-                        <p class="product-price">$120.00</p>
+                        <h1 class="product-title">Name:<?php echo htmlspecialchars($product['p_name']); ?></h1>
+                        <p class="product-price">Price:<?php echo htmlspecialchars($product['price']); ?></p>
 
                         <p><strong>Availability:</strong> In Stock</p>
-                        <p><strong>Category:</strong> Electronics</p>
+                        <p><strong>Category:</strong>Category:<?php echo htmlspecialchars($product['c_name']); ?></p>
 
                         <div class="product-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel malesuada nunc. Praesent sit amet
-                                turpis ac quam fermentum posuere et ac risus.</p>
+                            <p><?php echo htmlspecialchars($product['description']); ?></p>
                         </div>
 
                         <div class="quantity">
-                            <label for="quantity" class="form-label">Quantity:</label>
+                            <label for="quantity" class="form-label">Quantity:<?php echo htmlspecialchars($product['qty']); ?></label>
                             <input type="number" id="quantity" class="form-control quantity-input" value="1" min="1">
                         </div>
 
@@ -148,10 +175,10 @@ if (isset($_SESSION["u"])) {
                             <div class="p-4">
                                 <h4>Specifications</h4>
                                 <ul>
-                                    <li>Weight: 1.5kg</li>
-                                    <li>Dimensions: 25cm x 15cm x 10cm</li>
-                                    <li>Color: Black</li>
-                                    <li>Battery Life: 10 hours</li>
+                                    <li>Brand: <?php echo htmlspecialchars($product['b_name']); ?></li>
+                                    <li>Model: <?php echo htmlspecialchars($product['m_name']); ?></li>
+                                    <li>Size: <?php echo htmlspecialchars($product['s_name']); ?></li>
+                                    <li></li>
                                 </ul>
                             </div>
                         </div>

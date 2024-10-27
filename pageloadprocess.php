@@ -58,7 +58,7 @@ if ($n2 == 0) {
         <!-- card -->
 
     <div class="card col-6 col-lg-2 mt-2 mb-2 " style="width: 15rem;">
-        <a href="singleProduct.php">
+        <a href="singleProduct.php?id=<?php echo $d['product_p_id']; ?>">
         <img src="<?php echo $d["code"] ?>"  class="card-img-top img-thumbnail mt-2" style="height: 180px;" />
         </a>
            
